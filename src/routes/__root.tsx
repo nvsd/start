@@ -1,32 +1,30 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import type { PropsWithChildren } from "react";
-
-import { Layout } from "@/components/layout";
+import { Layout } from "@/features/layout/layout";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const Route = createRootRoute({
-  component: () => (
-    <Providers>
-      <Layout>
-        <Outlet />
-      </Layout>
-    </Providers>
-  ),
+  component: RootComponent,
 });
 
 const queryClient = new QueryClient();
-const Providers = ({ children }: PropsWithChildren) => {
+
+function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        {children}
-        <TanStackRouterDevtools />
-        <ReactQueryDevtools buttonPosition="bottom-right" />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="shop-ui-theme">
+        <TooltipProvider>
+          <Layout>
+            <Outlet />
+          </Layout>
+        </TooltipProvider>
+      </ThemeProvider>
+      <ReactQueryDevtools buttonPosition="bottom-left" />
+      <TanStackRouterDevtools position="bottom-right" />
     </QueryClientProvider>
   );
-};
+}
