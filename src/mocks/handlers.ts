@@ -54,6 +54,7 @@ export const handlers = [
     "/me",
     async () => {
       await delay();
+      return new HttpResponse(undefined, { status: 401 });
       return HttpResponse.json({
         id: "user-1",
         name: "John Doe",
