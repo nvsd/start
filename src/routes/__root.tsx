@@ -3,7 +3,6 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { Layout } from "@/features/layout/layout";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -18,9 +17,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="shop-ui-theme">
         <TooltipProvider>
-          <Layout>
-            <Outlet />
-          </Layout>
+          <Outlet />
         </TooltipProvider>
       </ThemeProvider>
       <ReactQueryDevtools buttonPosition="bottom-left" />
