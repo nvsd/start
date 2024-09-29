@@ -39,6 +39,11 @@ function Login() {
 }
 
 function LoginForm() {
+  const login = (formData: FormData) => {
+    const email = formData.get("email");
+    const password = formData.get("password");
+    alert(`'${email}' and '${password}'`);
+  };
   return (
     <Card className="w-full sm:max-w-sm rounded-none sm:rounded border-none shadow-none sm:shadow sm:border">
       <CardHeader>
@@ -47,19 +52,29 @@ function LoginForm() {
           Enter your email below to login to your account.
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full">Sign in</Button>
-      </CardFooter>
+      <form action={login}>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              name="email"
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input name="password" id="password" type="password" required />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button type="submit" className="w-full">
+            Sign in
+          </Button>
+        </CardFooter>
+      </form>
     </Card>
   );
 }
