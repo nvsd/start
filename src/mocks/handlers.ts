@@ -41,26 +41,7 @@ const initialColumns: [string, GetColumnResponseBody][] = [
 
 const allColumns = new Map<string, GetColumnResponseBody>(initialColumns);
 
-type GetMeParams = never;
-type GetMeRequestBody = never;
-type GetMeResponseBody = {
-  id: string;
-  name: string;
-  image?: string;
-};
-
 export const handlers = [
-  http.get<GetMeParams, GetMeRequestBody, GetMeResponseBody, "/me">(
-    "/me",
-    async () => {
-      await delay();
-      return new HttpResponse(undefined, { status: 401 });
-      return HttpResponse.json({
-        id: "user-1",
-        name: "John Doe",
-      });
-    }
-  ),
   http.get<
     GetColumnsParams,
     GetColumnsRequestBody,

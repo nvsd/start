@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useLoginMutation } from "@/api/authentication";
 
 export const Route = createFileRoute("/login")({
   component: Login,
@@ -39,10 +40,12 @@ function Login() {
 }
 
 function LoginForm() {
+  const mutation = useLoginMutation();
   const login = (formData: FormData) => {
     const email = formData.get("email");
     const password = formData.get("password");
-    alert(`'${email}' and '${password}'`);
+    if (!email || !password) throw new Error("Email and password are required");
+    mutation.mutate({ email: email.toString(), password: password.toString() });
   };
   return (
     <Card className="w-full sm:max-w-sm rounded-none sm:rounded border-none shadow-none sm:shadow sm:border">
