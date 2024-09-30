@@ -26,7 +26,7 @@ export const useLoginMutation = () => {
   return useMutation({
     mutationFn: (payload: LoginRequestBody) => login(payload),
     onSuccess() {
-      navigate({ to: "/about" });
+      navigate({ to: "/" });
     },
   });
 };
